@@ -1,0 +1,202 @@
+####################################
+####	I3 Config By:Matesz44	####
+####################################
+
+
+
+
+#modkey(win(Mod4)):
+set $mod Mod4
+
+#workspaces:
+set $ws1 	"1"
+set $ws2 	"2"
+set $ws3 	"3"
+set $ws4 	"4"
+set $ws5 	"5"
+set $ws6 	"6"
+set $ws7 	"7"
+set $ws8 	"8"
+set $ws9 	"9"
+set $ws10 	"10"
+set $ws11 	"11"
+set $ws12 	"12"
+set $ws13 	"13"
+set $ws14 	"14"
+set $ws15 	"15"
+set $ws16 	"16"
+set $ws17 	"17"
+set $ws18 	"18"
+set $ws19 	"19"
+set $ws20 	"20"
+
+#moving keys(vim like):
+set $left	h
+set $down	j
+set $up		k
+set $right	l
+
+#terminal:
+set $term --no-startup-id	urxvt
+
+#window border
+for_window [class="^.*"] border pixel 2
+
+#font:
+font pango:monospace 8
+#font pango:DejaVu Sans Mono 8
+
+# Before i3 v4.8, we used to recommend this one as the default:
+# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return 		exec $term
+
+# kill focused window
+bindsym $mod+q 		kill
+
+# start dmenu (a program launcher)
+bindsym $mod+d 				exec dmenu_run
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# change focus
+bindsym $mod+$left		focus left
+bindsym $mod+$down		focus down
+bindsym $mod+$up		focus up
+bindsym $mod+$right		focus right
+
+# move focused window
+bindsym $mod+Shift+$left	move left
+bindsym $mod+Shift+$down	move down
+bindsym $mod+Shift+$up		move up
+bindsym $mod+Shift+$right	move right
+
+#toggle split horiz or vert
+bindsym $mod+t			split toggle
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f			fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+#bindsym $mod+s layout stacking
+bindsym $mod+w			layout tabbed
+bindsym $mod+e			layout toggle split
+
+# toggle tiling / floating
+#bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space		focus mode_toggle
+
+# switch to workspace
+bindsym $mod+1 			workspace $ws1
+bindsym $mod+2 			workspace $ws2
+bindsym $mod+3 			workspace $ws3
+bindsym $mod+4 			workspace $ws4
+bindsym $mod+5			workspace $ws5
+bindsym $mod+6 			workspace $ws6
+bindsym $mod+7 			workspace $ws7
+bindsym $mod+8 			workspace $ws8
+bindsym $mod+9 			workspace $ws9
+bindsym $mod+0 			workspace $ws10
+bindsym $mod+Control+1		workspace $ws11
+bindsym $mod+Control+2 		workspace $ws12
+bindsym $mod+Control+3 		workspace $ws13
+bindsym $mod+Control+4 		workspace $ws14
+bindsym $mod+Control+5 		workspace $ws15
+bindsym $mod+Control+6 		workspace $ws16
+bindsym $mod+Control+7 		workspace $ws17
+bindsym $mod+Control+8 		workspace $ws18
+bindsym $mod+Control+9 		workspace $ws19
+bindsym $mod+Control+0 		workspace $ws20
+
+
+
+# move focused container to workspace
+bindsym $mod+Shift+1 		move container to workspace $ws1
+bindsym $mod+Shift+2		move container to workspace $ws2
+bindsym $mod+Shift+3 		move container to workspace $ws3
+bindsym $mod+Shift+4 		move container to workspace $ws4
+bindsym $mod+Shift+5 		move container to workspace $ws5
+bindsym $mod+Shift+6 		move container to workspace $ws6
+bindsym $mod+Shift+7 		move container to workspace $ws7
+bindsym $mod+Shift+8 		move container to workspace $ws8
+bindsym $mod+Shift+9 		move container to workspace $ws9
+bindsym $mod+Shift+0 		move container to workspace $ws10
+bindsym $mod+Control+Shift+1 	move container to workspace $ws11
+bindsym $mod+Control+Shift+2 	move container to workspace $ws12
+bindsym $mod+Control+Shift+3 	move container to workspace $ws13
+bindsym $mod+Control+Shift+4 	move container to workspace $ws14
+bindsym $mod+Control+Shift+5 	move container to workspace $ws15
+bindsym $mod+Control+Shift+6 	move container to workspace $ws16
+bindsym $mod+Control+Shift+7 	move container to workspace $ws17
+bindsym $mod+Control+Shift+8 	move container to workspace $ws18
+bindsym $mod+Control+Shift+9 	move container to workspace $ws19
+bindsym $mod+Control+Shift+0 	move container to workspace $ws20
+
+# reload the configuration file
+bindsym $mod+Shift+c		reload
+# restart i3
+bindsym $mod+Shift+r		restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e		exec "i3-nagbar -t warning -m 'Do you really want to exit i3?' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window's width.
+        # Pressing right will grow the window's width.
+        # Pressing up will shrink the window's height.
+        # Pressing down will grow the window's height.
+        bindsym $left 	resize shrink 	width 	10 px or 10 ppt
+        bindsym $down 	resize grow 	height 	10 px or 10 ppt
+        bindsym $up 	resize shrink 	height 	10 px or 10 ppt
+        bindsym $right 	resize grow 	width 	10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"
+
+#polybar
+exec_always --no-startup-id $HOME/.config/polybar/scripts/launch.sh
+
+#floating
+bindsym $mod+Shift+Return	exec urxvt -name floating
+#bindsym $mod+Shift+F1 exec firefox -name floating
+for_window [class="URxvt" instance="floating"] floating enable border pixel 4
+
+#gaps
+bindsym $mod+Control+i		gaps inner current plus 5
+bindsym $mod+Control+Shift+i	gaps inner current minus 5
+bindsym $mod+Control+o		gaps outer current plus 5
+bindsym $mod+Control+Shift+o	gaps outer current minus 5
+
+##Align to ws
+assign [class="Firefox"]	$ws10
+assign [class="Discord"]	$ws9
+assign [class="Audacious"]	$ws9
+assign [class="Thunar"]		$ws2
+#assign [class=""]		$ws10
+
+
+##Shortcuts
+bindsym	    $mod+F1	    exec --no-startup-id firefox
+bindsym	    $mod+F2	    exec --no-startup-id thunar
+bindsym	    $mod+F3	    exec --no-startup-id geany
+bindsym	    $mod+F4	    exec --no-startup-id atom
+bindsym	    $mod+F5	    exec --no-startup-id audacious
+bindsym	    $mod+F6	    exec --no-startup-id gimp
+#bindsym	    $mod+F7	    
+#bindsym	    $mod+F8
+#bindsym	    $mod+F9
+#bindsym	    $mod+F10
+#bindsym	    $mod+F11
+bindsym	    $mod+F12	    ecec scrot
