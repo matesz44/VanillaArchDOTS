@@ -1,0 +1,253 @@
+[bar/bar]
+
+line-size = 2
+
+font-0 = "Overpass Mono:pixelsize=10;2.25"
+
+#monitor = "DP1-8"
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+fixed-center = true
+
+width = 100%
+height = 20
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+radius = 0.0
+
+# line-size = 1
+# line-color = #f00
+
+# border-size = 2
+# border-color = #00ff00
+padding-left = 1
+padding-right = 1
+module-margin = 0
+
+;modules-left = powermenu gap i3 gap title gap
+modules-left = i3 gap title
+modules-center = date
+modules-right = weather gap volume gap cpu gap temperature gap memory gap eth gap powermenu
+
+;font-0 = Fira Mono Medium:pixelsize=8; 2
+font-1 = Font Awesome 5 Free:style=Solid:pixelsize=9; 2
+font-2 = Font Awesome 5 Free:style=Regular:pixelsize=9; 2
+font-3 = Font Awesome 5 Brands:pixelsize=9; 2
+font-4 = Font Awesome 5 Free:style=Solid:pixelsize=7; 2
+
+[module/i3]
+strip-wsnumbers = true
+type = internal/i3
+format = <label-state> <label-mode>
+
+label-focused = %index%
+label-focused-foreground = #cc6666
+;label-focused-background = #1d1f21
+label-focused-background = #700000
+label-focused-underline = #fba922
+label-focused-padding = 1
+
+label-unfocused = %index%
+label-unfocused-padding = 1
+
+label-visible = %index%
+label-visible-underline = #555555
+label-visible-padding = 1
+
+label-urgent = %index%
+label-urgent-foreground = #000000
+label-urgent-background = #bd2c40
+label-urgent-padding = 1
+
+[module/date]
+type = internal/date
+interval = 1.0
+;date = %A, %d %B %I:%M %p
+date-alt = %Y-%m(%B)-%d(%A) %I:%M:%S %p
+date = "%I:%M:%S %p"
+
+
+[module/title]
+type = internal/xwindow
+# format-background = #f00
+format-foreground = #f0c674
+format-padding = 1
+label-maxlen = 55
+
+
+[module/cpu]
+type = internal/cpu
+interval = 0.5
+
+format-prefix =  > 
+format-prefix-underline = #00ffff
+label-underline = #00ffff
+;format-prefix = CPU:
+format-prefix-foreground=#00ffff
+label = %percentage:2%%
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+
+format-prefix =  >
+;format-prefix = 
+format-prefix-underline = #00ff00
+label-underline = #00ff00
+format-warn-prefix =  >
+;format-warn-prefix = 
+format-prefix-foreground = #00ff00
+format-warn-prefix-foreground = #ff2200
+
+format = <label>
+format-warn = <label-warn>
+
+label = %temperature-c%
+label-warn = %temperature-c%
+label-warn-foreground = #ff2200
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix =  > 
+format-prefix-underline = #ffff00
+label-underline = #ffff00
+;format-prefix = "RAM: "
+format-prefix-foreground=#ffff00
+label = %percentage_used%% (%gb_used%)
+
+[module/gap]
+type = custom/text
+content = "   "
+
+[settings]
+screenchange-reload = true
+
+[module/volume]
+type = internal/alsa
+
+format-volume = <label-volume>
+format-volume-prefix = " "
+format-volume-prefix-foreground=${colors.foreground-prefix}
+label-volume-foreground = ${root.foreground}
+
+format-muted-prefix = " "
+
+format-muted-prefix-foreground=${colors.foreground-prefix}
+label-muted = MUTED
+##<bar-volume>
+bar-volume-width = 10
+bar-volume-gradient = false
+bar-volume-indicator = ━
+bar-volume-indicator-font = 2
+bar-volume-indicator-foreground = ${colors.active-led}
+bar-volume-fill = ━
+bar-volume-fill-font = 2
+bar-volume-fill-foreground = ${colors.foreground-prefix}
+bar-volume-empty = ━
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground}
+##
+
+[module/powermenu]
+type = custom/menu
+
+expand-right = false
+
+format-spacing = 1
+
+label-open =  
+;label-open-underline = ${colors.secondary}
+label-open-foreground = ${colors.secondary}
+label-close = cancel 
+;
+label-close-foreground = ${colors.secondary}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 =  reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 =  power off
+menu-0-1-exec = menu-open-2
+
+menu-1-0 =  cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 =  reboot
+menu-1-1-exec = reboot -i
+
+menu-2-0 =  power off
+menu-2-0-exec = shutdown -P 0
+menu-2-1 =  cancel
+menu-2-1-exec = menu-open-0
+;click-left="firefox gmail.com"
+
+[colors]
+;foreground = ${xrdb:color8:#222}
+foreground = #657b83
+;background = ${xrdb:color0:#222}
+background = #002b36
+
+foreground-inverse = ${xrdb:color0:#222}
+background-inverse = ${xrdb:color1:#222}
+
+foreground-faded = ${xrdb:color2:#222}
+background-raised = ${xrdb:color0:#222}
+
+;foreground-prefix = ${xrdb:color2:#222}
+foreground-prefix = ${xrdb:color2:#222}
+
+warning = ${xrdb:color3:#222}
+active-led = ${xrdb:color1:#222}
+;background = ${xrdb:color0:#222}
+#background = #222
+background-alt = #444
+;foreground = ${xrdb:color7:#222}
+#foreground = #dfdfdf
+foreground-alt = #555
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
+
+
+[module/eth]
+type = internal/network
+interface = enp3s0
+interval = 3.0
+
+;format-connected-underline = #55aa55
+format-connected-prefix = " "
+format-connected-prefix-foreground = #00aaff
+format-connected-underline = #00aaff
+label-connected = %local_ip% (%downspeed:10%)
+
+format-disconnected = NOT CONNECTED
+
+[module/kernel]
+type = custom/script
+exec = echo "$(uname -r)"
+;tail = true
+format-prefix=" "
+
+format-prefix-foreground=#8730c9
+
+
+;xeoncpu--discordról
+[module/weather]
+type = custom/script
+interval = 10
+format = <label>
+format-prefix = " "
+format-prefix-foreground = #FFFFFF
+format-underline = 
+#format-foreground = ${colors.foreground}
+format-foreground = ${colors.foreground}
+#format-background = ${colors.background}
+format-background = ${colors.background}
+exec = python -u ~/.config/polybar/scripts/weather.py
+tail = true
+click-left="firefox https://openweathermap.org/city/7284832"
